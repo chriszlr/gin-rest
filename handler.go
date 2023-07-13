@@ -93,3 +93,16 @@ func createPost(c*gin.Context){
 	posts = append(posts, post)
 	c.JSON(http.StatusCreated, post)
 }
+
+func getPostById(c*gin.Context){
+	id := c.Param("id")
+
+	for _, post := range posts{
+		if post.ID == id{
+			c.JSON(http.StatusOK, post)
+			return
+		}
+	}
+
+	c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+}
