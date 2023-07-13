@@ -77,3 +77,19 @@ func deleteUser(c*gin.Context){
 	}
 	c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 }
+
+func getPosts(c*gin.Context){
+	c.IndentedJSON(http.StatusOK, posts)
+}
+
+func createPost(c*gin.Context){
+	var post Post
+
+	if err := c.BindJSON(&post); err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	posts = append(posts, post)
+	c.JSON(http.StatusCreated, post)
+}

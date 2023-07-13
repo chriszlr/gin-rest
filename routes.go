@@ -9,4 +9,9 @@ func InitializeRoutes(router*gin.Engine){
 	router.GET("/users/:id", getUserByID)
 	router.PUT("/users/:id", updateUser)
 	router.DELETE("/users/:id", deleteUser)
+
+
+	// post routes
+	router.GET("/posts", getPosts)
+	router.POST("/posts", createPost)
 }
