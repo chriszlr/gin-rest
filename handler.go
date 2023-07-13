@@ -106,3 +106,30 @@ func getPostById(c*gin.Context){
 
 	c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
 }
+
+func updatePost(c*gin.Context){
+	id := c.Param("id")
+
+	var updatedPost Post
+
+	if err := c.BindJSON(&updatedPost); err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	for i, post := range posts{
+		if(post.ID == id){
+			if updatedPost.Title != "" {
+				posts[i].Title = updatedPost.Title
+			}
+
+			if(updatedPost.Content != ""){
+				posts[i].Content = updatedPost.Content
+			}
+
+			c.JSON(http.StatusOK, posts[i])
+			return
+		}
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+	}
+}

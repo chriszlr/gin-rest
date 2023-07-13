@@ -15,4 +15,5 @@ func InitializeRoutes(router*gin.Engine){
 	router.GET("/posts", getPosts)
 	router.POST("/posts", createPost)
 	router.GET("/posts/:id", getPostById)
+	router.PUT("/posts/:id", updatePost)
 }
