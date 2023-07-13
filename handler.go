@@ -133,3 +133,18 @@ func updatePost(c*gin.Context){
 		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
 	}
 }
+
+func deletePost(c*gin.Context){
+	id := c.Param("id")
+
+	for i, post := range posts{
+		if post.ID == id{
+			posts = append(posts[:i], posts[i+1:]...)
+
+			c.JSON(http.StatusOK, gin.H{"message": "Post deleted"})
+			return
+		}
+	}
+
+	c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+}
