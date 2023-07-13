@@ -7,4 +7,5 @@ func InitializeRoutes(router*gin.Engine){
 	router.GET("/users", getUsers)
 	router.POST("/users", createUser)
 	router.GET("/users/:id", getUserByID)
+	router.PUT("/users/:id", updateUser)
 }
